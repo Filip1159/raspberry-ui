@@ -1,0 +1,53 @@
+.videostream {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+    background: hsla(31, 99%, 54%, 1);
+    padding: 20px;
+    border-radius: 14px;
+
+    &__title {
+        font-size: 24px;
+        font-weight: 700;
+        color: white;
+        padding-left: 10px;
+    }
+
+    &__stream {
+        width: 640px;
+        height: 360px;
+    }
+
+    &__settings {
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        align-self: center;
+        font-weight: 700;
+        gap: 8px;
+        padding: 16px;
+        border-radius: 14px;
+
+        &__buttons {
+            display: flex;
+            flex-direction: row;
+            gap: 12px;
+
+            &__button {
+                font-size: 20px;
+                font-weight: 700;
+                color: white;
+                background-color: blue;
+                padding: 8px;
+                border-width: 0;
+                border-radius: 6px;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: rgb(0, 0, 200);
+                }
+            }
+        }
+    }
+}

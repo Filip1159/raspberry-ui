@@ -1,0 +1,40 @@
+import { Component, OnInit } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { AlarmComponent } from './alarm/alarm.component';
+import { HeaderComponent } from './header/header.component';
+import { VideoStreamComponent } from './video-stream/video-stream.component';
+import { SocketService } from './socket.service';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet, FormsModule, AlarmComponent, HeaderComponent, VideoStreamComponent],
+//   templateUrl: './app.component.html',
+  template: `
+  <div>
+      <h1>{{ message }}</h1>
+      <input [(ngModel)]="inputMessage" placeholder="Send a message" />
+      <button (click)="sendMessage()">Send</button>
+    </div>`,
+  styleUrl: './app.component.scss'
+})
+export class AppComponent implements OnInit {
+    message: string = '';
+    inputMessage: string = '';
+  
+    constructor(private socketService: SocketService) {}
+  
+    ngOnInit() {
+      // Nasłuchiwanie na wiadomości z serwera
+      this.socketService.listen('message').subscribe((msg: unknown) => {
+        if (typeof msg === 'string')
+            this.message = msg;
+      });
+    }
+
+    sendMessage() {
+        // Wysyłanie wiadomości do serwera
+        this.socketService.emit('message', this.inputMessage);
+      }
+}

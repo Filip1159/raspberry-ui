@@ -1,0 +1,15 @@
+<div class="videostream">
+    <span class="videostream__title">Video stream</span>
+    @if (videostreamOn) { 
+        <iframe class="videostream__stream" src="https://apt-dane-urgently.ngrok-free.app/cam1"></iframe>
+    } @else {
+        <div class="videostream__stream">Video paused</div>
+    }
+    <div class="videostream__settings">
+        <span>Live? yes/no</span>
+        <div class="videostream__settings__buttons">
+            <button class="videostream__settings__buttons__button" (click)="handleCameraOn()">Camera ON</button>
+            <button class="videostream__settings__buttons__button" (click)="handleCameraOff()">Camera OFF</button>
+        </div>
+    </div>
+</div>

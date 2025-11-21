@@ -1,0 +1,20 @@
+.header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+    background-color: #c51d4a;
+    padding: 12px 12px 24px 24px;
+
+    &__logo {
+        height: 40px;
+    }
+
+    &__name {
+        margin: 0;
+        padding-top: 10px;
+        font-size: 32px;
+        font-weight: 700;
+        color: white;
+    }
+}
