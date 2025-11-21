@@ -1,27 +1,38 @@
-# RaspberryUi
+# The Raspberry UI frontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.4.
+Hello! Welcome to my repository containing the Raspberry UI app frontend. Developed since I obtained my engineering degree in 2024, I finally decided to publish it after almost two years after implementing authentication 🔑. The project was intended to work as a home monitoring system, but I added some other features.
 
-## Development server
+#### Current features :on:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- live camera stream
+- GPIO interfacing the 16x2 LCD display
+- Ngrok hosting. Website available at https://apt-dane-urgently.ngrok-free.app/
 
-## Code scaffolding
+#### Features in progres :construction:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- websocket communnication from GPIO keypad to UI
 
-## Build
+- programmable alarm clock build with buzzer
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+#### Components used
 
-## Running unit tests
+:computer: Raspberry Pi 5 module - 8GB RAM version [[Botland]](https://botland.store/raspberry-pi-5-modules-and-kits/23905-raspberry-pi-5-8gb-5056561803326.html)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+:camera: Raspberry Pi Camera HD v3 12 MPx [[Botland]](https://botland.store/raspberry-pi-cameras/22480-raspberry-pi-camera-hd-v3-wide-12mpx-original-camera-for-raspberry-pi-5056561800363.html)
 
-## Running end-to-end tests
+:symbols: LCD display 2x16 [[Botland]](https://botland.store/alphanumeric-and-graphic-displays/224-lcd-display-2x16-blue-characters-5903351241380.html)
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+:1234: 4x4 membrane keypad [[Botland]](https://botland.store/keyboards-for-arduino/17119-self-adhesive-membrane-keyboard-4x4-16-keys-5903351247870.html)
 
-## Further help
+A custom made 3D printed frame with tall camera stand - shared soon
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+#### Software
+
+:cd: Raspberry Pi OS 12 (Bookworm)
+
+:ng: Typescript + Angular. As a React developer I keep struggling with this framework, but I find it really educational
+
+:symbols: SocketIO for communication initiated by Raspberry
+
+Please also take a look at the [[backend repository]](https://github.com/Filip1159/raspberry-backend)
+
