@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { AlarmComponent } from '../components/alarm/alarm.component';
-import { HeaderComponent } from '../components/header/header.component';
-import { VideoStreamComponent } from '../components/video-stream/video-stream.component';
-import { SocketService } from '../socket.service';
+import { AlarmComponent } from './../alarm/alarm.component';
+import { HeaderComponent } from './../header/header.component';
+import { VideoStreamComponent } from './../video-stream/video-stream.component';
+import { SocketService } from './../../socket.service';
 
 @Component({
 	selector: 'app-root',
 	standalone: true,
-	imports: [RouterOutlet, FormsModule, AlarmComponent, HeaderComponent, VideoStreamComponent],
+	imports: [FormsModule, AlarmComponent, HeaderComponent, VideoStreamComponent],
 	templateUrl: './app.component.html',
 	styleUrl: './app.component.scss'
 })
