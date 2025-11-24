@@ -1,7 +1,8 @@
-<main class="main">
-    <div class="content">
-        <div>Sign in to see the live video stream</div>
-        <form [formGroup]="form" (submit)="onSubmit()">
+<main class="loginPage">
+    <img class="loginPage__logo" src="raspberry-pi.svg"> 
+    <div class="loginPage__content">
+        <div class="loginPage__content__title">Sign in to see the live video stream</div>
+        <form class="loginPage__content__form" [formGroup]="form" (submit)="onSubmit()">
             <div class="inputWrapper">
                 <label class="inputWrapper__label" for="username">Username:</label>
                 <input [formControl]="form.controls.username" class="inputWrapper__input" id="username" type="text" />
@@ -10,7 +11,7 @@
                 <label class="inputWrapper__label" for="password">Password:</label>
                 <input [formControl]="form.controls.password" class="inputWrapper__input" id="password" type="password" />
             </div>
-            <button [disabled]="!form.valid" class="button">Enter</button>
+            <button class="button">Enter</button>
         </form>
         @if (error()) {
             <p style="color: red">{{ error() }}</p>
