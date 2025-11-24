@@ -1,0 +1,75 @@
+.loginPage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+
+    &__logo {
+        width: 200px;
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 20px;
+        width: 500px;
+        height: 500px;
+
+        &__title {
+            font-size: 22px;
+            margin-left: 40px;
+        }
+
+        &__form {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 40px;
+            border-radius: 25px;
+            background-color: #c51d4a;
+            padding: 40px;
+        }
+    }
+}
+
+.inputWrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 14px;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 1px;
+
+    &__label {
+        font-style: italic;
+        color: white;
+    }
+
+    &__input {
+        width: 100%;
+        font-size: 16px;
+        font-weight: 400;
+        padding: 3px 10px;
+        border-radius: 5px;
+        border: none;
+    }
+}
+
+.button {
+    background-color: blue;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: white;
+    padding: 8px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+
+    &:hover {
+        background-color: rgb(0, 0, 200);
+    }
+}
