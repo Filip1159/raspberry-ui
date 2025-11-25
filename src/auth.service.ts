@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 interface LoginResponse {
-	token: string;
+	access_token: string;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -14,11 +14,11 @@ export class AuthService {
 
 	token = signal<string | null>(localStorage.getItem('jwt'));
 
-	private apiUrl = '/api/login';
+	private apiUrl = 'http://10.174.167.213:5000/flask/login';
 
 	login(username: string, password: string) {
-		return new Observable<LoginResponse>(s => s.next({ token: "token" }));
-		// return this.http.post<LoginResponse>(this.apiUrl, { username, password });
+		// return new Observable<LoginResponse>(s => s.next({ token: "token" }));
+		return this.http.post<LoginResponse>(this.apiUrl, { username, password });
 	}
 
 	saveToken(token: string) {

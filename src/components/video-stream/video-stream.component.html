@@ -1,7 +1,7 @@
 <div class="videostream">
     <span class="videostream__title">Video stream</span>
     @if (videostreamOn) { 
-        <iframe class="videostream__stream" src="https://apt-dane-urgently.ngrok-free.app/cam1"></iframe>
+        <video id="video" class="videostream__stream" autoplay playsinline controls></video>
     } @else {
         <div class="videostream__stream">Video paused</div>
     }

@@ -27,7 +27,7 @@ export class Login {
 
 		this.auth.login(username!, password!).subscribe({
 			next: (res) => {
-				this.auth.saveToken(res.token);
+				this.auth.saveToken(res.access_token);
 				this.router.navigate(['/']);
 			},
 			error: () => this.error.set('Niepoprawne dane logowania')
