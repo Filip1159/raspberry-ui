@@ -9,10 +9,9 @@ export class SocketService {
     private socket: Socket;
 
     constructor() {
-      this.socket = io('http://192.168.0.144:8080');  // Adres serwera Flask
+      this.socket = io('http://10.148.104.187:8080');
     }
 
-    // Nasłuchiwanie na wiadomości z serwera
     listen(eventName: string) {
         return new Observable((subscriber) => {
             this.socket.on(eventName, (data: any) => {
@@ -21,7 +20,6 @@ export class SocketService {
         });
     }
 
-    // Wysyłanie wiadomości do serwera
     emit(eventName: string, data: any) {
         this.socket.emit(eventName, data);
     }

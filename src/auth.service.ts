@@ -14,7 +14,7 @@ export class AuthService {
 
 	token = signal<string | null>(localStorage.getItem('jwt'));
 
-	private apiUrl = 'http://10.174.167.213:5000/flask/login';
+	private apiUrl = 'http://10.148.104.187:5000/flask/login';
 
 	login(username: string, password: string) {
 		// return new Observable<LoginResponse>(s => s.next({ token: "token" }));

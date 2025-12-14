@@ -1,15 +1,36 @@
 <div class="videostream">
-    <span class="videostream__title">Video stream</span>
-    @if (videostreamOn) { 
-        <video id="video" class="videostream__stream" autoplay playsinline controls></video>
-    } @else {
-        <div class="videostream__stream">Video paused</div>
-    }
-    <div class="videostream__settings">
-        <span>Live? yes/no</span>
-        <div class="videostream__settings__buttons">
-            <button class="videostream__settings__buttons__button" (click)="handleCameraOn()">Camera ON</button>
-            <button class="videostream__settings__buttons__button" (click)="handleCameraOff()">Camera OFF</button>
-        </div>
+    <div class="videostream__stream">
+        <span class="videostream__stream__title">Video stream</span>
+        <video id="video" class="videostream__stream__video" autoplay playsinline controls width="720" height="480"></video>
+        <button class="button" [disabled]="cameraTurnedOn()" (click)="cameraOn()">Camera ON</button>
+    </div>
+    <div class="videostream__steering">
+        <longpress-button (press)="move('UP_LEFT')">
+            <fa-icon [icon]="faAngleUp" rotate="-45deg" size="3x"/>
+        </longpress-button>
+        <longpress-button (press)="move('UP')">
+            <fa-icon [icon]="faAngleUp" size="3x"/>
+        </longpress-button>
+        <longpress-button (press)="move('UP_RIGHT')">
+            <fa-icon [icon]="faAngleUp" rotate="45deg" size="3x"/>
+        </longpress-button>
+        <longpress-button (press)="move('LEFT')">
+            <fa-icon [icon]="faAngleUp" rotate="-90deg" size="3x"/>
+        </longpress-button>
+        <button class="button" (click)="move('CENTER')">
+            <fa-icon [icon]="faArrowsToCircle" size="2x"/>
+        </button>
+        <longpress-button (press)="move('RIGHT')">
+            <fa-icon [icon]="faAngleUp" rotate="90deg" size="3x"/>
+        </longpress-button>
+        <longpress-button (press)="move('DOWN_LEFT')">
+            <fa-icon [icon]="faAngleUp" rotate="225deg" size="3x"/>
+        </longpress-button>
+        <longpress-button (press)="move('DOWN')">
+            <fa-icon [icon]="faAngleUp" rotate="180deg" size="3x"/>
+        </longpress-button>
+        <longpress-button (press)="move('DOWN_RIGHT')">
+            <fa-icon [icon]="faAngleUp" rotate="135deg" size="3x"/>
+        </longpress-button>
     </div>
 </div>

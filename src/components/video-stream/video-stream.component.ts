@@ -1,38 +1,27 @@
-import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { AuthService } from '../../auth.service';
+import { SocketService } from '../../socket.service';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faAngleUp, faArrowsToCircle } from '@fortawesome/free-solid-svg-icons';
+import { LongPressButton } from '../longpress-button/longpress-button.component';
 
 @Component({
   selector: 'app-video-stream',
   standalone: true,
-  imports: [],
+  imports: [FontAwesomeModule, LongPressButton],
   templateUrl: './video-stream.component.html',
   styleUrl: './video-stream.component.scss'
 })
 export class VideoStreamComponent {
-    WHEP_URL = "http://10.174.167.213:8889/cam1/whep";
-    API_URL = `https://apt-dane-urgently.ngrok-free.app/flask`
-    videostreamOn = true
+    WHEP_URL = "http://10.148.104.187:8889/cam1/whep"
+    faAngleUp = faAngleUp
+    faArrowsToCircle = faArrowsToCircle
 
-    constructor(private http: HttpClient, private authService: AuthService) {}
+    cameraTurnedOn = signal(false)
 
-    handleCameraOn(): void {
-        console.log('on')
-        // this.http.get(`${this.API_URL}/start-cam`).subscribe(data => {
-        //     console.log(data)
-        // })
-        // setTimeout(() => this.videostreamOn = true, 500)
-        this.connectToStream()
-    }
+    constructor(private authService: AuthService, private socket: SocketService) {}
 
-    handleCameraOff(): void {
-        this.http.get(`${this.API_URL}/stop-cam`).subscribe(data => {
-            console.log(data)
-        })
-        this.videostreamOn = false
-    }
-
-    async connectToStream(): Promise<void> {    
+    async cameraOn(): Promise<void> { 
         const pc = new RTCPeerConnection({
             iceServers: [{ urls: ["stun:stun.l.google.com:19302"] }]
         });
@@ -56,8 +45,6 @@ export class VideoStreamComponent {
             body: offer.sdp
         });
 
-        console.log(resp)
-
         if (!resp.ok) {
             console.error("Błąd odpowiedzi WHEP:", await resp.text());
             alert("Błąd autentykacji lub odpowiedzi z MediaMTX. Sprawdź konsolę.");
@@ -71,6 +58,10 @@ export class VideoStreamComponent {
             sdp: answerSdp
         });
 
-        console.log("Połączenie WebRTC ustanowione!");
+        this.cameraTurnedOn.set(true)
+    }
+
+    move(msg: string): void {
+        this.socket.emit('message', msg)
     }
 }

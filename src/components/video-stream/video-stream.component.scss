@@ -1,53 +1,40 @@
 .videostream {
     display: flex;
-    flex-direction: column;
-    gap: 20px;
-    align-items: flex-start;
+    gap: 40px;
+    align-items: center;
     background: hsla(31, 99%, 54%, 1);
-    padding: 20px;
+    padding: 40px;
     border-radius: 14px;
 
-    &__title {
-        font-size: 24px;
-        font-weight: 700;
-        color: white;
-        padding-left: 10px;
-    }
-
     &__stream {
-        width: 640px;
-        height: 360px;
-    }
-
-    &__settings {
-        background-color: white;
         display: flex;
         flex-direction: column;
-        align-self: center;
-        font-weight: 700;
-        gap: 8px;
-        padding: 16px;
+        gap: 20px;
+        align-items: flex-start;
+        background: hsla(31, 99%, 54%, 1);
         border-radius: 14px;
 
-        &__buttons {
-            display: flex;
-            flex-direction: row;
-            gap: 12px;
-
-            &__button {
-                font-size: 20px;
-                font-weight: 700;
-                color: white;
-                background-color: blue;
-                padding: 8px;
-                border-width: 0;
-                border-radius: 6px;
-                cursor: pointer;
-
-                &:hover {
-                    background-color: rgb(0, 0, 200);
-                }
-            }
+        &__title {
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+            padding-left: 10px;
         }
+    }
+
+    &__steering {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        column-gap: 20px;
+        row-gap: 20px;
+    }
+
+    @media (max-width: 1200px) {
+        flex-direction: column;
+    }
+
+    @media (min-width: 1200px) {
+        flex-direction: row;
     }
 }
