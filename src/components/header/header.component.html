@@ -1,4 +1,15 @@
 <header class="header">
-    <img class="header__logo" src="raspberry-pi.svg" />
-    <h1 class="header__name">Raspberry UI</h1>
+    <div class="header__banner">
+        <img class="header__banner__img" src="raspberry-pi.svg" alt="logo" />
+        <h1 class="header__banner__name">Raspberry UI</h1>
+    </div>
+    <nav class="header__tabs">
+        <a routerLink="/" class="header__tabs__tab"> Live stream </a>
+        <a routerLink="/alarm" class="header__tabs__tab"> Alarm </a>
+        <a routerLink="/greet" class="header__tabs__tab"> Greet me </a>
+        <a routerLink="/about-me" class="header__tabs__tab"> About me </a>
+    </nav>
+    <div class="header__logout" (click)="logout()">
+        <fa-icon [icon]="faArrowRightFromBracket" size="3x" color="white" />
+    </div>
 </header>

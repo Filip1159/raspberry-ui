@@ -35,4 +35,3 @@ A custom made 3D printed frame with tall camera stand - shared soon
 :symbols: SocketIO for communication initiated by Raspberry
 
 Please also take a look at the [[backend repository]](https://github.com/Filip1159/raspberry-backend)
-
