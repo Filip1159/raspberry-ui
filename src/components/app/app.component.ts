@@ -1,13 +1,12 @@
 import { Component, inject, OnInit } from '@angular/core'
 import { FormsModule } from '@angular/forms'
-import { HeaderComponent } from './../header/header.component'
 import { VideoStreamComponent } from './../video-stream/video-stream.component'
 import { SocketService } from './../../socket.service'
 
 @Component({
     selector: 'app-root',
     standalone: true,
-    imports: [FormsModule, HeaderComponent, VideoStreamComponent],
+    imports: [FormsModule, VideoStreamComponent],
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss',
 })

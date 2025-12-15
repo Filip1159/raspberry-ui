@@ -1,0 +1,5 @@
+<main class="alarmManager content">
+    @for (alarm of schedules; track alarm.day) {
+        <app-alarm day="{{alarm.day}}"></app-alarm>
+    }
+</main>

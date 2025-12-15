@@ -1,22 +1,35 @@
 .alarm {
     display: flex;
     flex-direction: row;
-    gap: 20px;
-    align-items: flex-start;
-    background: #8a2be2;
+    align-items: center;
+    justify-content: space-between;
+    background: blue;
     padding: 20px;
     border-radius: 14px;
     color: white;
     font-weight: 700;
+    margin: 10px 30px;
+
+    &__day {
+        font-size: 34px;
+    }
+
+    &__settings {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 20px;
+        padding-right: 40px;
+    }
 
     &__inputWrapper {
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: flex-start;
         gap: 8px;
 
         &__label {
-            font-size: 28px;
+            font-size: 20px;
         }
 
         &__input {
@@ -25,7 +38,7 @@
             justify-content: center;
             align-items: center;
             border-radius: 6px;
-            background-color: #aa4bf2;
+            background-color: blue;
 
             &__value {
                 font-size: 28px;
@@ -38,7 +51,7 @@
                 flex-direction: column;
 
                 &__button {
-                    background-color: rgba($color: #000000, $alpha: 0);
+                    background-color: rgba($color: black, $alpha: 0);
                     border-width: 0;
                     cursor: pointer;
                     color: white;
@@ -46,10 +59,18 @@
                     border-bottom-right-radius: 6px;
 
                     &:hover {
-                        background-color: rgba($color: #000000, $alpha: 0.2);
+                        background-color: rgba($color: black, $alpha: 0.2);
                     }
                 }
             }
         }
+    }
+
+    @media (min-width: 1000px) {
+        width: 800px;
+    }
+
+    @media (max-width: 1000px) {
+        width: 600px;
     }
 }
