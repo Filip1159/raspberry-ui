@@ -19,7 +19,7 @@
         flex-direction: row;
         align-items: center;
         gap: 20px;
-        padding-right: 40px;
+        padding-right: 20px;
     }
 
     &__inputWrapper {
@@ -83,7 +83,7 @@
         }
 
         &::before {
-            content: "";
+            content: '';
             width: 24px;
             height: 24px;
             transform: scale(0);
@@ -98,11 +98,30 @@
         }
     }
 
+    &__melodySelect {
+        background-color: white;
+        height: 32px;
+        width: 180px;
+        border: 2px solid black;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 20px;
+        text-align: center;
+    }
+
+    &__melodyPlay {
+        cursor: pointer;
+
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+
     @media (min-width: 1000px) {
         width: 800px;
     }
 
     @media (max-width: 1000px) {
-        width: 600px;
+        width: 640px;
     }
 }

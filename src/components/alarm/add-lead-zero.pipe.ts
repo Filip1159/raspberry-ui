@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core'
 
 @Pipe({
-    name: 'addLeadZero'
+    name: 'addLeadZero',
 })
 export class AddLeadZeroPipe implements PipeTransform {
     transform(value: number, length: number): string {
