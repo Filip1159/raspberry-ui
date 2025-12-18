@@ -4,22 +4,23 @@
         <div class="alarm__inputWrapper">
             <span class="alarm__inputWrapper__label">Hour</span>
             <div class="alarm__inputWrapper__input">
-                <span class="alarm__inputWrapper__input__value">09</span>
+                <span class="alarm__inputWrapper__input__value">{{ hour | addLeadZero:2 }}</span>
                 <div class="alarm__inputWrapper__input__buttonsWrapper">
-                    <button class="alarm__inputWrapper__input__buttonsWrapper__button">&#11205;</button>
-                    <button class="alarm__inputWrapper__input__buttonsWrapper__button">&#11206;</button>
+                    <button class="alarm__inputWrapper__input__buttonsWrapper__button" (click)="incrementHour()">&#11205;</button>
+                    <button class="alarm__inputWrapper__input__buttonsWrapper__button" (click)="decrementHour()">&#11206;</button>
                 </div>
             </div>
         </div>
         <div class="alarm__inputWrapper">
             <span class="alarm__inputWrapper__label">Minute</span>
             <div class="alarm__inputWrapper__input">
-                <span class="alarm__inputWrapper__input__value">30</span>
+                <span class="alarm__inputWrapper__input__value">{{ minute | addLeadZero:2 }}</span>
                 <div class="alarm__inputWrapper__input__buttonsWrapper">
-                    <button class="alarm__inputWrapper__input__buttonsWrapper__button">&#11205;</button>
-                    <button class="alarm__inputWrapper__input__buttonsWrapper__button">&#11206;</button>
+                    <button class="alarm__inputWrapper__input__buttonsWrapper__button" (click)="incrementMinute()">&#11205;</button>
+                    <button class="alarm__inputWrapper__input__buttonsWrapper__button" (click)="decrementMinute()">&#11206;</button>
                 </div>
             </div>
         </div>
+        <input type="checkbox" class="alarm__checkbox" [checked]="enabled" (click)="toggleEnabled()"/>
     </div>
 </div>
