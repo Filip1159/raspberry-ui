@@ -1,0 +1,58 @@
+import { HttpClient } from "@angular/common/http";
+import { inject, Injectable } from "@angular/core";
+import { Observable } from "rxjs";
+
+
+interface LoginResponse {
+    access_token: string
+}
+
+export interface Alarm {
+    day: string
+    hour: number
+    minute: number
+    melody: string
+    enabled: boolean
+}
+
+
+const API_URL = 'http://10.148.104.187:8080'
+const WEBRTC_URL = 'http://10.148.104.187:8889'
+
+
+@Injectable({ providedIn: 'root' })
+export class RaspberryApi {
+    http = inject(HttpClient)
+
+    login(username: string, password: string): Observable<LoginResponse> {
+        return this.http.post<LoginResponse>(`${API_URL}/login`, { username, password })
+    }
+
+    authorizeWebRTC(token: string, sdp: any) {
+        return this.http.post(
+            `${WEBRTC_URL}/cam1/whep`,
+            sdp,
+            {
+                headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/sdp' },
+                responseType: 'text'
+            })
+    }
+
+    getAlarms(token: string): Observable<Alarm[]> {
+        return this.http.get<Alarm[]>(`${API_URL}/alarms`, { headers: { Authorization: `Bearer ${token}` } })
+    }
+
+    saveAlarms(token: string, alarms: Alarm[]): Observable<void> {
+        return this.http.post<void>(
+            `${API_URL}/alarms`,
+            JSON.stringify(alarms),
+            { headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' } })
+    }
+
+    playMelody(token: string, melody: string): Observable<void> {
+        return this.http.post<void>(
+            `${API_URL}/alarms/play`,
+            JSON.stringify({ melody }),
+            { headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' } })
+    }
+}

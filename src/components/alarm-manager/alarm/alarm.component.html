@@ -1,10 +1,10 @@
 <div class="alarm">
-    <div class="alarm__day">{{ day }}</div>
+    <div class="alarm__day">{{ form.value.day }}</div>
     <div class="alarm__settings">
         <div class="alarm__inputWrapper">
             <span class="alarm__inputWrapper__label">Hour</span>
             <div class="alarm__inputWrapper__input">
-                <span class="alarm__inputWrapper__input__value">{{ hour | addLeadZero: 2 }}</span>
+                <span class="alarm__inputWrapper__input__value">{{ form.value.hour | addLeadZero: 2 }}</span>
                 <div class="alarm__inputWrapper__input__buttonsWrapper">
                     <button class="alarm__inputWrapper__input__buttonsWrapper__button" (click)="incrementHour()">&#11205;</button>
                     <button class="alarm__inputWrapper__input__buttonsWrapper__button" (click)="decrementHour()">&#11206;</button>
@@ -14,19 +14,19 @@
         <div class="alarm__inputWrapper">
             <span class="alarm__inputWrapper__label">Minute</span>
             <div class="alarm__inputWrapper__input">
-                <span class="alarm__inputWrapper__input__value">{{ minute | addLeadZero: 2 }}</span>
+                <span class="alarm__inputWrapper__input__value">{{ form.value.minute | addLeadZero: 2 }}</span>
                 <div class="alarm__inputWrapper__input__buttonsWrapper">
                     <button class="alarm__inputWrapper__input__buttonsWrapper__button" (click)="incrementMinute()">&#11205;</button>
                     <button class="alarm__inputWrapper__input__buttonsWrapper__button" (click)="decrementMinute()">&#11206;</button>
                 </div>
             </div>
         </div>
-        <input type="checkbox" class="alarm__checkbox" [checked]="enabled" (click)="toggleEnabled()" />
+        <input type="checkbox" class="alarm__checkbox" [checked]="form.value.enabled" (click)="toggleEnabled()" />
         <select class="alarm__melodySelect" (change)="setMelody($event)">
             @for (m of melodies; track m) {
-                <option [value]="m" [selected]="m === melody">{{ m }}</option>
+                <option [value]="m" [selected]="m === form.value.melody">{{ m }}</option>
             }
         </select>
-        <fa-icon class="alarm__melodyPlay" [icon]="faPlay" size="xl" (click)="play(melody)" />
+        <fa-icon class="alarm__melodyPlay" [icon]="faPlay" size="xl" (click)="play(form.value.melody)" />
     </div>
 </div>

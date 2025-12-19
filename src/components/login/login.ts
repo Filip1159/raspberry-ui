@@ -1,7 +1,7 @@
 import { Component, inject, signal } from '@angular/core'
 import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms'
 import { Router } from '@angular/router'
-import { AuthService } from '../../auth.service'
+import { AuthService } from '../../service/auth.service'
 
 @Component({
     selector: 'app-login',
@@ -30,7 +30,7 @@ export class Login {
                 this.auth.saveToken(res.access_token)
                 this.router.navigate(['/'])
             },
-            error: () => this.error.set('Niepoprawne dane logowania'),
+            error: () => this.error.set('Wrong credentials'),
         })
     }
 }

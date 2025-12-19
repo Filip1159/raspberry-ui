@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core'
 import { FormsModule } from '@angular/forms'
 import { VideoStreamComponent } from './../video-stream/video-stream.component'
-import { SocketService } from './../../socket.service'
+import { SocketService } from '../../service/socket.service'
 
 @Component({
     selector: 'app-root',

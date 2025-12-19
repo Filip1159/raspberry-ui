@@ -1,15 +1,8 @@
-import { Component, inject, OnInit, signal } from '@angular/core'
-import { HttpClient } from '@angular/common/http'
-import { AlarmComponent } from '../alarm/alarm.component'
-import { AuthService } from '../../auth.service'
-
-export interface AlarmSchedule {
-    day: string
-    hour: number
-    minute: number
-    melody: string
-    enabled: boolean
-}
+import { Component, ChangeDetectorRef, inject, OnInit, signal } from '@angular/core'
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { AlarmComponent } from './alarm/alarm.component'
+import { AuthService } from '../../service/auth.service'
+import { Alarm, RaspberryApi } from '../../service/raspberry.api'
 
 @Component({
     selector: 'alarm-manager',
@@ -19,69 +12,50 @@ export interface AlarmSchedule {
     styleUrl: './alarm-manager.component.scss',
 })
 export class AlarmManagerComponent implements OnInit {
-    http = inject(HttpClient)
+    api = inject(RaspberryApi)
     auth = inject(AuthService)
+    formBuilder = inject(FormBuilder)
+    cd = inject(ChangeDetectorRef)
 
-    API_URL = 'http://10.148.104.187:8080'
-
-    readonly daysOfWeek = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
-
-    schedules = signal<AlarmSchedule[]>([])
+    alarms: FormArray<FormGroup> = this.formBuilder.array<FormGroup>([]);
+    alarmsSignal = signal<FormGroup[]>([])
 
     ngOnInit(): void {
-        this.http.get<AlarmSchedule[]>(`${this.API_URL}/alarms`, { headers: { Authorization: `Bearer ${this.auth.token()}` } }).subscribe({
+        this.api.getAlarms(this.auth.token()!).subscribe({
             next: res => {
-                console.log(res)
-                this.schedules.set(res)
+                res.forEach(a => this.alarms.push(this.createAlarmGroup(a)))
+                this.alarmsSignal.set(this.alarms.controls)
             },
-            error: err => console.error('Save failed', err),
+            error: err => console.error('Get alarms failed', err)
         })
     }
 
-    setMinute(day: string, minute: number) {
-        this.schedules.set(
-            this.schedules().map(item => {
-                if (item.day === day) return { ...item, minute }
-                else return item
-            })
-        )
-    }
-
-    setHour(day: string, hour: number) {
-        this.schedules.set(
-            this.schedules().map(item => {
-                if (item.day === day) return { ...item, hour }
-                else return item
-            })
-        )
-    }
-
-    setEnabled(day: string, enabled: boolean) {
-        this.schedules.set(
-            this.schedules().map(item => {
-                if (item.day === day) return { ...item, enabled }
-                else return item
-            })
-        )
-    }
-
-    setMelody(day: string, melody: string) {
-        this.schedules.set(
-            this.schedules().map(item => {
-                if (item.day === day) return { ...item, melody }
-                else return item
-            })
-        )
+    private createAlarmGroup(alarm: Alarm): FormGroup {
+        return this.formBuilder.group({
+            day: [alarm.day],
+            hour: [
+                alarm.hour,
+                [Validators.required, Validators.min(0), Validators.max(23)],
+            ],
+            minute: [
+                alarm.minute,
+                [Validators.required, Validators.min(0), Validators.max(59)],
+            ],
+            enabled: [alarm.enabled],
+            melody: [alarm.melody, Validators.required],
+        });
     }
 
     save(): void {
-        this.http
-            .post(`${this.API_URL}/alarms`, JSON.stringify(this.schedules()), {
-                headers: { Authorization: `Bearer ${this.auth.token()}`, 'Content-Type': 'application/json' },
-            })
+        if (this.alarms?.invalid) {
+            this.alarms.markAllAsTouched();
+            return;
+        }
+        this.api.saveAlarms(this.auth.token()!, this.alarms!.value)
             .subscribe({
                 next: () => alert('Schedule saved'),
                 error: err => console.error('Save failed', err),
             })
     }
+
 }

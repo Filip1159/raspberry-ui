@@ -1,9 +1,9 @@
-import { Component, inject, signal } from '@angular/core'
-import { AuthService } from '../../auth.service'
-import { SocketService } from '../../socket.service'
+import { Component, effect, ElementRef, inject, signal, ViewChild } from '@angular/core'
+import { SocketService } from '../../service/socket.service'
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 import { faAngleUp, faArrowsToCircle } from '@fortawesome/free-solid-svg-icons'
-import { LongPressButton } from '../longpress-button/longpress-button.component'
+import { LongPressButton } from './longpress-button/longpress-button.component'
+import { WebRTCService } from '../../service/webrtc.service'
 
 @Component({
     selector: 'app-video-stream',
@@ -13,53 +13,29 @@ import { LongPressButton } from '../longpress-button/longpress-button.component'
     styleUrl: './video-stream.component.scss',
 })
 export class VideoStreamComponent {
-    authService = inject(AuthService)
-    socket = inject(SocketService)
+    @ViewChild('video', { static: false })
+    private video!: ElementRef<HTMLVideoElement>
 
-    WHEP_URL = 'http://10.148.104.187:8889/cam1/whep'
+    private socket = inject(SocketService)
+    private webrtc = inject(WebRTCService)
+
     faAngleUp = faAngleUp
     faArrowsToCircle = faArrowsToCircle
 
     cameraTurnedOn = signal(false)
 
-    async cameraOn(): Promise<void> {
-        const pc = new RTCPeerConnection({
-            iceServers: [{ urls: ['stun:stun.l.google.com:19302'] }],
+    constructor() {
+        effect(() => {
+            const stream = this.webrtc.mediaStream()
+            if (stream) {
+                this.video.nativeElement.srcObject = stream
+            }
+            this.cameraTurnedOn.set(this.webrtc.authorized())
         })
+    }
 
-        pc.ontrack = event => {
-            const video = document.querySelector('#video') as HTMLVideoElement
-            video.srcObject = event.streams[0]
-        }
-
-        pc.addTransceiver('video', { direction: 'recvonly' })
-
-        const offer = await pc.createOffer()
-        await pc.setLocalDescription(offer)
-
-        const resp = await fetch(this.WHEP_URL, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/sdp',
-                Authorization: `Bearer ${this.authService.token()}`,
-            },
-            body: offer.sdp,
-        })
-
-        if (!resp.ok) {
-            console.error('Błąd odpowiedzi WHEP:', await resp.text())
-            alert('Błąd autentykacji lub odpowiedzi z MediaMTX. Sprawdź konsolę.')
-            return
-        }
-
-        const answerSdp = await resp.text()
-
-        await pc.setRemoteDescription({
-            type: 'answer',
-            sdp: answerSdp,
-        })
-
-        this.cameraTurnedOn.set(true)
+    cameraOn() {
+        this.webrtc.cameraOn()
     }
 
     move(msg: string): void {

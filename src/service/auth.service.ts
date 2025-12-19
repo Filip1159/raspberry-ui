@@ -1,23 +1,17 @@
 import { Injectable, signal, inject } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { Router } from '@angular/router'
-
-interface LoginResponse {
-    access_token: string
-}
+import { RaspberryApi } from './raspberry.api'
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-    private http = inject(HttpClient)
+    private api = inject(RaspberryApi)
     private router = inject(Router)
 
     token = signal<string | null>(localStorage.getItem('jwt'))
 
-    private apiUrl = 'http://10.148.104.187:5000/flask/login'
-
     login(username: string, password: string) {
-        // return new Observable<LoginResponse>(s => s.next({ token: "token" }));
-        return this.http.post<LoginResponse>(this.apiUrl, { username, password })
+        return this.api.login(username, password)
     }
 
     saveToken(token: string) {

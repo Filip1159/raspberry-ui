@@ -1,7 +1,7 @@
 <div class="videostream">
     <div class="videostream__stream">
         <span class="videostream__stream__title">Video stream</span>
-        <video id="video" class="videostream__stream__video" autoplay playsinline controls width="720" height="480"></video>
+        <video #video class="videostream__stream__video" autoplay playsinline controls width="720" height="480"></video>
         <button class="button" [disabled]="cameraTurnedOn()" (click)="cameraOn()">Camera ON</button>
     </div>
     <div class="videostream__steering">
