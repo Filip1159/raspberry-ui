@@ -17,7 +17,7 @@ export class AlarmManagerComponent implements OnInit {
     formBuilder = inject(FormBuilder)
     cd = inject(ChangeDetectorRef)
 
-    alarms: FormArray<FormGroup> = this.formBuilder.array<FormGroup>([]);
+    alarms: FormArray<FormGroup> = this.formBuilder.array<FormGroup>([])
     alarmsSignal = signal<FormGroup[]>([])
 
     ngOnInit(): void {
@@ -26,36 +26,28 @@ export class AlarmManagerComponent implements OnInit {
                 res.forEach(a => this.alarms.push(this.createAlarmGroup(a)))
                 this.alarmsSignal.set(this.alarms.controls)
             },
-            error: err => console.error('Get alarms failed', err)
+            error: err => console.error('Get alarms failed', err),
         })
     }
 
     private createAlarmGroup(alarm: Alarm): FormGroup {
         return this.formBuilder.group({
             day: [alarm.day],
-            hour: [
-                alarm.hour,
-                [Validators.required, Validators.min(0), Validators.max(23)],
-            ],
-            minute: [
-                alarm.minute,
-                [Validators.required, Validators.min(0), Validators.max(59)],
-            ],
+            hour: [alarm.hour, [Validators.required, Validators.min(0), Validators.max(23)]],
+            minute: [alarm.minute, [Validators.required, Validators.min(0), Validators.max(59)]],
             enabled: [alarm.enabled],
             melody: [alarm.melody, Validators.required],
-        });
+        })
     }
 
     save(): void {
         if (this.alarms?.invalid) {
-            this.alarms.markAllAsTouched();
-            return;
+            this.alarms.markAllAsTouched()
+            return
         }
-        this.api.saveAlarms(this.auth.token()!, this.alarms!.value)
-            .subscribe({
-                next: () => alert('Schedule saved'),
-                error: err => console.error('Save failed', err),
-            })
+        this.api.saveAlarms(this.auth.token()!, this.alarms!.value).subscribe({
+            next: () => alert('Schedule saved'),
+            error: err => console.error('Save failed', err),
+        })
     }
-
 }

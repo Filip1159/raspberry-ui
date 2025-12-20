@@ -1,5 +1,4 @@
 import { Injectable, signal, inject } from '@angular/core'
-import { HttpClient } from '@angular/common/http'
 import { Router } from '@angular/router'
 import { RaspberryApi } from './raspberry.api'
 

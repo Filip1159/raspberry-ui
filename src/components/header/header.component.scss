@@ -1,7 +1,7 @@
 .header {
     display: flex;
     flex-direction: row;
-    gap: 100px;
+    justify-content: space-between;
     background-color: #c51d4a;
 
     &__banner {
@@ -9,25 +9,29 @@
         flex-direction: row;
         align-items: center;
         gap: 20px;
-        padding: 12px 12px 24px 24px;
+        padding: 12px 12px 20px 24px;
 
         &__img {
-            height: 40px;
+            height: 50px;
         }
 
         &__name {
             margin: 0;
             padding-top: 10px;
-            font-size: 32px;
+            font-size: 30px;
             font-weight: 700;
             color: white;
+
+            @media (max-width: 950px) {
+                display: none;
+            }
         }
     }
 
     &__tabs {
         display: flex;
         flex-direction: row;
-        gap: 40px;
+        gap: 10px;
 
         &__tab {
             display: flex;

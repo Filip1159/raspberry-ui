@@ -12,11 +12,11 @@ import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons'
     styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
-    authService = inject(AuthService)
+    auth = inject(AuthService)
 
     faArrowRightFromBracket = faArrowRightFromBracket
 
     logout() {
-        this.authService.logout()
+        this.auth.logout()
     }
 }
