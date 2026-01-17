@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core'
 import { io, Socket } from 'socket.io-client'
 import { Observable } from 'rxjs'
+import { env } from './../environment'
 
 @Injectable({
     providedIn: 'root',
@@ -9,7 +10,7 @@ export class SocketService {
     private socket: Socket
 
     constructor() {
-        this.socket = io('http://10.148.104.187:8080')
+        this.socket = io(env.backendApiUrl)
     }
 
     listen(eventName: string) {

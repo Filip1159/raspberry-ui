@@ -23,7 +23,7 @@ export class RaspberryApi {
         return this.http.post<LoginResponse>(`${env.backendApiUrl}/login`, { username, password })
     }
 
-    authorizeWebRTC(token: string, sdp: never) {
+    authorizeWebRTC(token: string, sdp: string) {
         return this.http.post(`${env.webrtcUrl}/cam1/whep`, sdp, {
             headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/sdp' },
             responseType: 'text',

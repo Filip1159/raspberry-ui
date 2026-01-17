@@ -1,14 +1,15 @@
 import { Component, effect, ElementRef, inject, signal, ViewChild } from '@angular/core'
 import { SocketService } from '../../service/socket.service'
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
-import { faAngleUp, faArrowsToCircle } from '@fortawesome/free-solid-svg-icons'
+import { faAngleUp, faArrowsToCircle, faLightbulb } from '@fortawesome/free-solid-svg-icons'
 import { LongPressButton } from './longpress-button/longpress-button.component'
 import { WebRTCService } from '../../service/webrtc.service'
+import { Slider } from './slider/slider'
 
 @Component({
     selector: 'app-video-stream',
     standalone: true,
-    imports: [FontAwesomeModule, LongPressButton],
+    imports: [FontAwesomeModule, LongPressButton, Slider],
     templateUrl: './video-stream.component.html',
     styleUrl: './video-stream.component.scss',
 })
@@ -21,8 +22,10 @@ export class VideoStreamComponent {
 
     faAngleUp = faAngleUp
     faArrowsToCircle = faArrowsToCircle
+    faLightbulb = faLightbulb
 
     cameraTurnedOn = signal(false)
+    brightness = 100
 
     constructor() {
         effect(() => {
@@ -40,5 +43,9 @@ export class VideoStreamComponent {
 
     move(msg: string): void {
         this.socket.emit('message', msg)
+    }
+
+    setBrightness(value: number): void {
+        this.socket.emit('message', `LED${value}`)
     }
 }

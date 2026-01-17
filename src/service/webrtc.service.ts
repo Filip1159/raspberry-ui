@@ -25,7 +25,7 @@ export class WebRTCService {
         const offer = await pc.createOffer()
         await pc.setLocalDescription(offer)
 
-        this.api.authorizeWebRTC(this.auth.token()!, offer.sdp).subscribe({
+        this.api.authorizeWebRTC(this.auth.token()!, offer.sdp!).subscribe({
             next: res => {
                 pc.setRemoteDescription({
                     type: 'answer',

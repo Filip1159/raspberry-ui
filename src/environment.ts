@@ -1,5 +1,5 @@
 export const env = {
     production: false,
-    backendApiUrl: 'http://10.148.104.187:8080',
-    webrtcUrl: 'http://10.148.104.187:8889',
+    backendApiUrl: 'http://10.145.105.190:8080',
+    webrtcUrl: 'http://10.145.105.190:8889',
 }
