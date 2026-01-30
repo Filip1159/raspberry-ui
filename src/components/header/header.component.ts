@@ -3,11 +3,12 @@ import { RouterLink } from '@angular/router'
 import { AuthService } from '../../service/auth.service'
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons'
+import { Stats } from './../stats/stats'
 
 @Component({
     selector: 'app-header',
     standalone: true,
-    imports: [FontAwesomeModule, RouterLink],
+    imports: [FontAwesomeModule, RouterLink, Stats],
     templateUrl: './header.component.html',
     styleUrl: './header.component.scss',
 })

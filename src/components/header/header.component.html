@@ -13,9 +13,12 @@
         <a routerLink="/greetings" class="header__tabs__tab">Greet me</a>
         <a routerLink="/" class="header__tabs__tab">About me</a>
     </nav>
-    @if (auth.isLoggedIn()) {
-        <div class="header__logout" (click)="logout()">
-            <fa-icon [icon]="faArrowRightFromBracket" size="3x" color="white" />
-        </div>
-    }
+    <div class="header__icons">
+        <stats></stats>
+        @if (auth.isLoggedIn()) {
+            <div class="header__logout" (click)="logout()">
+                <fa-icon [icon]="faArrowRightFromBracket" size="3x" color="white" />
+            </div>
+        }
+    </div>
 </header>

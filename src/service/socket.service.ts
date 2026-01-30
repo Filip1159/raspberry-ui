@@ -13,9 +13,9 @@ export class SocketService {
         this.socket = io(env.backendApiUrl)
     }
 
-    listen(eventName: string) {
+    listen<T>(eventName: string): Observable<T> {
         return new Observable(subscriber => {
-            this.socket.on(eventName, data => {
+            this.socket.on(eventName, (data: T) => {
                 subscriber.next(data)
             })
         })
